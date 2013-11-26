@@ -227,11 +227,11 @@ var testSuite = function () {
         $( '#priorityValidator' ).val('notanemail');
         expect( $( '#priorityForm' ).parsley( 'validate' ) ).to.be( false );
         // just type validation error
-        expect( $( '#' + $( '#priorityValidator' ).parsley( 'getHash' ) + ' li' ).length ).to.be( 1 );
+        expect( $( '#' + $( '#priorityValidator' ).parsley( 'getHash' ) + ' li.type' ).length ).to.be( 1 );
         $( '#priorityValidator' ).val('foo@bar.baz');
         expect( $( '#priorityForm' ).parsley( 'validate' ) ).to.be( false );
         // 15 chars min length validator here
-        expect( $( '#' + $( '#priorityValidator' ).parsley( 'getHash' ) + ' li' ).length ).to.be( 1 );
+        expect( $( '#' + $( '#priorityValidator' ).parsley( 'getHash' ) + ' li.minlength' ).length ).to.be( 1 );
       } )
     } )
 
@@ -446,6 +446,15 @@ var testSuite = function () {
         triggerSubmitValidation( '#typephone', '(917) 5878 5457' );
         expect( $( '#typephone' ).hasClass( 'parsley-success' ) ).to.be( true );
       } )
+      it ( 'tel', function () {
+        triggerSubmitValidation( '#typephone2', 'foo' );
+        expect( $( '#typephone2' ).hasClass( 'parsley-error' ) ).to.be( true );
+        expect( getErrorMessage( '#typephone2', 'type') ).to.be( 'This value should be a valid phone number.' );
+        triggerSubmitValidation( '#typephone2', '(917) 5878 5457' );
+        expect( $( '#typephone2' ).hasClass( 'parsley-success' ) ).to.be( true );
+      } )
+
+
       it ( 'number', function () {
         triggerSubmitValidation( '#typenumber', 'foo' );
         expect( $( '#typenumber' ).hasClass( 'parsley-error' ) ).to.be( true );
@@ -701,10 +710,14 @@ var testSuite = function () {
             successClass: 'parsley-great'
           , errorClass: 'parsley-fail'
           , errors: {
-            classHandler: function () {
+            classHandler: function ( element, isRadioOrCheckbox ) {
+              expect( isRadioOrCheckbox ).to.be( false );
+              expect( element ).to.be.an( 'object' );
               return $( '#errorsmanagement-labelinfo' );
             }
-            , container: function () {
+            , container: function ( element , isRadioOrCheckbox ) {
+              expect( isRadioOrCheckbox ).to.be( false );
+              expect( element ).to.be.an( 'object' );
               return $( '#errorsmanagement-labelerror' );
             }
             , errorsWrapper: '<div></div>'
@@ -1079,6 +1092,17 @@ var testSuite = function () {
       } )
     } )
 
+    /***************************************
+          test parsley DOM-API namespace
+     ***************************************/
+     describe ( 'test parsley DOM-API namespace', function () {
+       it ( 'Test overriding default parsley DOM-API', function () {
+         $( '#dom-api-input' ).val( 'foo' );
+         expect( $( '#dom-api' ).parsley( 'validate' ) ).to.be( false );
+         $( '#dom-api-input' ).val( 'foobarbazquxbux' );
+         expect( $( '#dom-api' ).parsley( 'validate' ) ).to.be( true );
+       } )
+     } )
     /***************************************
             test parsley.extend.js
      ***************************************/
