@@ -10,7 +10,7 @@ See TODO.md
 
 #Curent Stable Version
 
-1.2.1
+1.2.2
 
 # Browser compatibility
 
@@ -21,7 +21,7 @@ See TODO.md
 
 # Min requirements
 
-jQuery 1.6+
+jQuery 1.7+
 
 #Install dependencies for documentation and tests
 
@@ -64,6 +64,12 @@ Some integrations are
 * [Wicket](https://github.com/code-troopers/wicket-jsr303-parsley)
 * [WTForms](https://github.com/johannes-gehrs/wtforms-parsleyjs)
 * [Cascade Framework](https://github.com/jslegers/cascadeframework/)
+
+##Conditional Logic
+
+If you want to show and hide form elements based on answers to certain fields, the library below extends parsely.js adding conditional logic.
+
+* [Parsely-conditions](http://themonk.github.io/parsely-conditions/)
 
 ## Global
 

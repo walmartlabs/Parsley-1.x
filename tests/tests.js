@@ -137,8 +137,13 @@ var testSuite = function () {
     ***************************************/
     describe ( 'Test Parsley auto binding', function () {
       it ( 'Items with validation methods inside a form validated by Parsley are binded', function () {
+        // with parsley-validate
         expect( $( '#input1' ).hasClass( 'parsley-validated' ) ).to.be( true );
         expect( $( '#textarea1' ).hasClass( 'parsley-validated' ) ).to.be( false );
+
+        // with data-parsley-validate
+        expect( $( '#input1-1' ).hasClass( 'parsley-validated' ) ).to.be( true );
+        expect( $( '#textarea1-1' ).hasClass( 'parsley-validated' ) ).to.be( false );
       } )
       it ( 'Items with validation methods can be validated as stand-alone too', function () {
         expect( $( '#input2' ).hasClass( 'parsley-validated' ) ).to.be( true );
@@ -796,7 +801,7 @@ var testSuite = function () {
         $( '#scenario-keyup-when-notvalid' ).trigger( $.Event( 'keyup' ) );
         expect( $( '#scenario-keyup-when-notvalid' ).hasClass( 'parsley-success' ) ).to.be( true );
 
-        // than keypress is alaways listened, to avoid false values with success classes, until real trigger event is fired..
+        // than keypress is always listened, to avoid false values with success classes, until real trigger event is fired..
         $( '#scenario-keyup-when-notvalid' ).val( 'foo@bar' );
         $( '#scenario-keyup-when-notvalid' ).trigger( $.Event( 'keyup' ) );
         expect( $( '#scenario-keyup-when-notvalid' ).hasClass( 'parsley-success' ) ).to.be( false );
@@ -963,7 +968,7 @@ var testSuite = function () {
         $( '#onthefly' ).parsley( 'removeConstraint', 'type' ).val( 'foo' );
         $( '#onthefly-form' ).parsley( 'validate' );
         expect( $( '#onthefly' ).hasClass( 'parsley-error' ) ).to.be( false );
-        expect( $( '#onthefly' ).hasClass( 'parsley-validated' ) ).to.be( false );
+        expect( $( '#onthefly' ).hasClass( 'parsley-validated' ) ).to.be( true );
       } )
       it ( 'test setting custom error container within parsley-attributes', function () {
         expect( $( '#dataerrorcontainer-form' ).parsley( 'validate' ) ).to.be( false );
@@ -986,6 +991,31 @@ var testSuite = function () {
     /***************************************
               test custom functions
     ***************************************/
+    describe ( 'API calling' , function () {
+      it ( 'allow to call form methods', function () {
+        expect( $( '#api-calls-form' ).parsley( 'validate' ) ).to.be( true );
+        expect( $( '#programmableField' ).hasClass( 'parsley-success' ) ).to.be( true );
+        
+        $( '#api-calls-form' ).parsley( 'reset' );
+        expect( $( '#programmableField' ).hasClass( 'parsley-success' ) ).to.be( false );
+      } )
+      
+      it ( 'allow to call field methods', function() {
+        $( '#programmableField' ).val( '12345' );
+        expect( $( '#api-calls-form' ).parsley( 'validate' ) ).to.be( true );
+        
+        expect( $( '#programmableField' ).parsley( 'addConstraint', { minlength: 8 } ) );
+        expect( $( '#api-calls-form' ).parsley( 'validate' ) ).to.be( false );
+        
+        expect( $( '#programmableField' ).parsley( 'updateConstraint', { minlength: 3 } ) );
+        expect( $( '#api-calls-form' ).parsley( 'validate' ) ).to.be( true );
+        
+        expect( $( '#programmableField' ).parsley( 'updateConstraint', { minlength: 8 }, "Less than 8 is not enough" ) );
+        expect( $( '#api-calls-form' ).parsley( 'validate' ) ).to.be( false );
+        expect( $( '#api-calls-form .parsley-error-list .minlength' ).text() ).to.be( "Less than 8 is not enough" );
+      } )
+    } )
+    
     describe ( 'Test custom listeners', function () {
       describe ( 'Test overriding listeners in config', function () {
         it ( 'test onFieldValidate()', function () {
