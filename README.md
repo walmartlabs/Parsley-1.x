@@ -1,7 +1,6 @@
-﻿#Parsley.js
+﻿### WARNING: This page documents Parsley 1.x versions, which is NOT the latest stable release (2.x versions are). Unless you are here on purpose, you probably want to be viewing the latest documentation. Go to [parsleyjs.org](http://parsleyjs.org) for latest.
 
-[![Build Status](https://travis-ci.org/guillaumepotier/Parsley.js.png?branch=master)](https://travis-ci.org/guillaumepotier/Parsley.js)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/guillaumepotier/parsley.js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+#Parsley.js 1.x
 
 Javascript form validation, without actually writing a single line of javascript!
 
