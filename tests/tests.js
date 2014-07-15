@@ -934,7 +934,7 @@ var testSuite = function () {
         it ( 'only shows a single field validation message', function () {
           var field = $( '#twoValidationTypes' );
           field.val( 'notanemail' );
-          field.parsley( 'validate', { onlyOneValidationMsg: true } );
+          field.parsley( 'validate' );
           expect( field.siblings( "ul" ).children().length ).to.be( 1 );
           expect( field.siblings( "ul" ).children().hasClass("maxlength")).to.be( true );
         } )
