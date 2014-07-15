@@ -450,9 +450,18 @@
     */
     , addError: function ( error ) {
       for ( var constraint in error ) {
+        var $ul = $( this.ulError )
         var liTemplate = $( this.options.errors.errorElem ).addClass( constraint );
 
-        $( this.ulError ).append( this.options.animate ? $( liTemplate ).html( error[ constraint ] ).hide().fadeIn( this.options.animateDuration ) : $( liTemplate ).html( error[ constraint ] ) );
+        if (this.options.onlyOneValidationMsg && $ul.children().length > 0) {
+          $ul.empty();
+        }
+
+        $ul.append(
+          this.options.animate ?
+            $( liTemplate ).html( error[ constraint ] ).hide().fadeIn( this.options.animateDuration ) :
+            $( liTemplate ).html( error[ constraint ] )
+        );
       }
 
       return this;

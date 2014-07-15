@@ -923,6 +923,22 @@ var testSuite = function () {
         $( '#dynamic-disabled-email' ).attr( 'disabled', true );
         expect( $( '#dynamic-excluded' ).parsley( 'validate' ) ).to.be( true );
       } )
+
+      describe( 'Test onlyOneValidationMsg set to true', function () {
+        beforeEach( function () {
+          window.ParsleyConfig.onlyOneValidationMsg = true;
+        } )
+        afterEach( function () {
+          delete window.ParsleyConfig.onlyOneValidationMsg;
+        } )
+        it ( 'only shows a single field validation message', function () {
+          var field = $( '#twoValidationTypes' );
+          field.val( 'notanemail' );
+          field.parsley( 'validate' );
+          expect( field.siblings( "ul" ).children().length ).to.be( 1 );
+          expect( field.siblings( "ul" ).children().hasClass("maxlength")).to.be( true );
+        } )
+      } )
     } )
 
     /***************************************
