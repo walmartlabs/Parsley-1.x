@@ -405,6 +405,7 @@
       this.ParsleyInstance = ParsleyInstance;
       this.hash = ParsleyInstance.hash;
       this.options = this.ParsleyInstance.options;
+      console.log(this.ParsleyInstance.options);
       this.errorClassHandler = this.options.errors.classHandler( this.ParsleyInstance.element, this.ParsleyInstance.isRadioOrCheckbox ) || this.ParsleyInstance.$element;
       this.ulErrorManagement();
     }
@@ -450,9 +451,18 @@
     */
     , addError: function ( error ) {
       for ( var constraint in error ) {
+        var $ul = $( this.ulError )
         var liTemplate = $( this.options.errors.errorElem ).addClass( constraint );
 
-        $( this.ulError ).append( this.options.animate ? $( liTemplate ).html( error[ constraint ] ).hide().fadeIn( this.options.animateDuration ) : $( liTemplate ).html( error[ constraint ] ) );
+        if (this.options.onlyOneValidationMsg && $ul.children().length > 0) {
+          $ul.empty();
+        }
+
+        $ul.append(
+          this.options.animate ?
+            $( liTemplate ).html( error[ constraint ] ).hide().fadeIn( this.options.animateDuration ) :
+            $( liTemplate ).html( error[ constraint ] )
+        );
       }
 
       return this;
