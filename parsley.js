@@ -405,7 +405,6 @@
       this.ParsleyInstance = ParsleyInstance;
       this.hash = ParsleyInstance.hash;
       this.options = this.ParsleyInstance.options;
-      console.log(this.ParsleyInstance.options);
       this.errorClassHandler = this.options.errors.classHandler( this.ParsleyInstance.element, this.ParsleyInstance.isRadioOrCheckbox ) || this.ParsleyInstance.$element;
       this.ulErrorManagement();
     }
