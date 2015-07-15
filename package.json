@@ -1,0 +1,22 @@
+{
+  "name": "parsley",
+  "version": "1.2.4-WML-2",
+  "description": "#Parsley.js 1.x",
+  "main": "parsley.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walmartlabs/Parsley-1.x.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/walmartlabs/Parsley-1.x/issues"
+  },
+  "homepage": "https://github.com/walmartlabs/Parsley-1.x#readme"
+}
