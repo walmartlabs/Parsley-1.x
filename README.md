@@ -1,4 +1,12 @@
-﻿### WARNING: This page documents Parsley 1.x versions, which is NOT the latest stable release (2.x versions are). Unless you are here on purpose, you probably want to be viewing the latest documentation. Go to [parsleyjs.org](http://parsleyjs.org) for latest.
+***
+# NOTICE:
+
+## This repository has been archived and is not supported.
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+***
+
+### WARNING: This page documents Parsley 1.x versions, which is NOT the latest stable release (2.x versions are). Unless you are here on purpose, you probably want to be viewing the latest documentation. Go to [parsleyjs.org](http://parsleyjs.org) for latest.
 
 #Parsley.js 1.x
 
